@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <title> GetYourVax </title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  
+  <!-- Fontawesome CDN Link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <!-- Move to up button -->
+  <div class="scroll-button">
+    <a href="#home"><i class="fas fa-arrow-up"></i></a>
+  </div>
+  <!-- navgaition menu -->
+  <nav>
+    <div class="navbar">
+      <div class="logo"><a href="#">Get Your Vax</a></div>
+      <ul class="menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Form</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <div class="cancel-btn">
+          <i class="fas fa-times"></i>
+        </div>
+      </ul>
+    </div>
+    <div class="menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+
+  <!-- Home Section Start -->
+  <section class="home" id="home">
+    <div class="home-content">
+      <div class="text">
+        <div class="text-one">Hello,</div>
+        <div class="text-two">Welcome to Get Your Vax</div>
+        <div class="text-three">Get vaccinated and stay safe</div>
+        <!-- <div class="text-four">From Nepal</div> -->
+      </div>
+      <div class="button">
+        <a href="#about"><button>Read more</button></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section Start -->
+  <section class="about" id="about">
+    <div class="content">
+      <div class="title"><span>About Us</span></div>
+      <div class="about-details">
+        <div class="left">
+          <img src="{{ url_for('static', filename='images/unnamed.png') }}" alt="">
+          
+        </div>
+        <div class="right">
+          <div class="topic">We help you to find your nearest vaccination center</div>
+          <p>Here is what you need to do to get the info</p>
+          <ul>
+            <li>Enter Your District</li>
+            <li>Enter Your slot date</li>
+            <li>Enter the dosage number</li>
+          </ul>
+          <p>As finding the nearest vaccination center in our locality has become a bigger task. So, we are here to help
+            you to find your nearest vaccination center and You can find the vaccination center with the exact google
+            loaction of it. It reduces your time and helps you to reach your vaccination center quickly
+
+          </p>
+          <div class="button">
+            <a href="#skills"><button>Fill the form</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- My Skill Section Start -->
+  <!-- Section Tag and Other Div will same where we need to put same CSS -->
+  <section class="skills" id="skills">
+    <div class="content">
+      <div class="title"><span>Form</span></div>
+      <div id="formh">
+        <div class="container">
+          <div class="title">Check the availability of vaccines</div>
+          <div class="cont">
+            <form method="POST" >
+              <div class="user-details">
+                <div class="input-box">
+                  <span class="details">District</span>
+                  <input type="text" name="name" placeholder="Enter District" required>
+                </div>
+                <div class="input-box">
+                  <label for="Date">Date:</label>
+                  <input type="date" id="date" name="date" required>
+                </div>
+              </div>
+              <div class="gender-details">
+                <input type="radio" name="gender" id="dot-1">
+                <input type="radio" name="gender" id="dot-2">
+                <span class="gender-title">Dosage</span>
+                <div class="category">
+                  <label for="dot-1">
+                    <span class="dot one"></span>
+                    <span class="First Dose">First Dose</span>
+                  </label>
+                  <label for="dot-2">
+                    <span class="dot two"></span>
+                    <span class="Second Dose">Second Dose</span>
+                  </label>
+                  <label for="Vaccines">Choose a vaccine:</label>
+                  <select name="Vaccines" id="Vaccines">
+                    <option value="Covaxin">Covaxin</option>
+                    <option value=" COVISHIELD">Covisheild</option>
+                    <option value="Sputnik V">Sputnik V</option>
+                  </select>
+                </div>
+              </div>
+              <input type="number" step="any" name = "lattitude" id = "lattitude" placeholder="Lattitude" required><br>
+              <input type = "number" step="any" name = "longitude" id = "longitude" placeholder="Longitude" required><br>
+              <div class="button">
+                <input type="submit" value="Submit">
+              </div>
+            </form>
+            <button onclick="getLocation()">AutoFill co-ordinates</button>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- My Services Section Start -->
+
+
+
+  <!-- Contact Me section Start -->
+  <section class="contact" id="contact">
+    <div class="content">
+      <div class="title"><span>Contact Us</span></div>
+      <div class="text">
+        <div class="topic">Any Queries?</div>
+        <p>If you have any queries/doubts or unable to find your nearest location, you can feel free to mail</p>
+        <div class="button">
+          <a href="mailto:abcd@gmail.com"><button>Mail</button></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section Start -->
+  <footer>
+    <div class="text">
+      <span><a href="#">KMIT</a></span>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script>
+    var latitude = document.getElementById("lattitude");
+    var longitude = document.getElementById("longitude");
+    
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } 
+      else{
+        latitude.value = 40;
+        longitude.value = 70;
+      }
+    }
+    
+    function showPosition(position) {
+      console.log(position.coords)
+      latitude.value = position.coords.latitude;
+      longitude.value = position.coords.longitude;
+    }
+    </script>
+</body>
+
+</html>
